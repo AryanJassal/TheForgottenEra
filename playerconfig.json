@@ -1,0 +1,12 @@
+{
+    "player_data": {
+        "name": "Admin",
+        "max_health": 100,
+        "attack": 6 ,
+        "defense": {
+            "min": 1,
+            "max": 4
+        },
+        "exp": 10
+    }
+}

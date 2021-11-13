@@ -1,0 +1,13 @@
+{
+    "actions": {
+        "go|move": {
+            "left": "$move_left",
+            "right": "$move_right",
+            "up": "$move_up",
+            "down": "$move_down"
+        },
+        "use": {
+            "%consumable": "$use"
+        }
+    }
+}
