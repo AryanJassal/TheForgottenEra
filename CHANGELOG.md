@@ -2,42 +2,33 @@
 
 ## Build Highlights
 
-GIANT UPDATE!!! Added a lot of features. You know what? I'm naming this build a beta release.
-
-## Build Notes
-
-`use` action not working yet. Oh, yeah. I added actions.
+Fixed issues in the `use` action, and added other actions. My command parser now basically ready for (almost) any commands.
 
 ## New Features/Additons
 
-- Modified project structure (see *Changes/Bug Fixes*)
-- Added `__init__.py` to each module and sub-module
-- Added actions
-- Added action parsing
-- Added player and enemy classes
-- Adding item classes
-- Working on `use` command
+- Added new methods to Player class
+  - Added `get_inventory`
+  - Added `get_item_from_inventory`
+  - Added `acquire_item`
+  - Added `get_stats`
+- Added new methods to Item class
+  - Added `get_tags`
 
 ## Changes/Bug Fixes
 
-- Changes to project structure
-
-  - Removed `entities` and `items` folder from `game_objects` subfolder.
-    - Added `utils.py` file to this sub-module
-    - Added `default_enemy_config.json` for testing enemies. This feature may end up in the final product.
-    - Added `base_enemies.py` which instantiates these default enemies.
-  - `utils` folder has been removed in favour of `utils.py` file
-  - `worldgen` has been renamed to `world`
-    - Added `default_actions.json` and `default_actions.py` file to this sub-module. They deal with action commands such as `move left`.
-    - Added `parse_actions` file. This is a simple yet complex parser which parses json command structure into actual commands and rules.
+- Cleaned up code in many places (removed commented, unused code)
+- Updated `Poison.consume()` to support no arguments being passed
+  - Added a temporary notifier that poison has been drunk
+- Removed `temp_playerinv`
 
 ## **Agenda for next update**
 
-- Fixing `use` command
-- Adding more commands
+- Adding more commands (working on it)
 - Adding more items
-- Making the player inventory function
+- Making the player inventory function (working on it; need to display it)
 - Making a player save file
 - Adding worldgen
 - Cleaning up UI
-- Making a proper loop using the `main.py` file in project root
+- Display all stats in `stats` command
+- Add modifiers to poison which affect all stats
+- Deal with command edge cases (error: index out of range on no input)

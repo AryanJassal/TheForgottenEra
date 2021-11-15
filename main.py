@@ -13,35 +13,40 @@ with open('items.json', 'r') as file:
 player = zyga.entity_classes.Player(zyga.game_objects.create_attribute_list(playerdata))
 squirrel = zyga.entities.hideous_squirrel
 
-# print(player.get_name(), 'enters the arena with', player.get_health(), 'health!')
-# print('Oh? What is this? A', squirrel.get_name(), 'walks in with', squirrel.get_health(), 'health!')
-# print('The player did not like how', squirrel.get_name(), 'looked! They attacked them, dealing', player.calculate_damage(squirrel), 'damage!')
-# player.attack_entity(squirrel)
-# print(squirrel.get_name(), 'is only left with', squirrel.get_health(), 'health!')
-# print('The', squirrel.get_name(), 'is annoyed! It attacks the', player.get_name(), 'back, dealing', squirrel.calculate_damage(player), 'damage! It\'s nothing for the ' + player.get_name() + '!')
-# squirrel.attack_entity(player)
-# print('The player attacks its enemy agian, dealing', player.calculate_damage(squirrel), 'damage!')
-# player.attack_entity(squirrel)
-
-# while squirrel.has_health():
-#     print('The squirrel still has', squirrel.get_health(), 'health left. The player attacks it again, dealing', player.calculate_damage(squirrel), 'damage!')
-#     player.attack_entity(squirrel)
-
-# else:
-#     print('The squirrel couldn\'t handle the ' + player.get_name() + '\'s power and has died! It dropped', squirrel.death_exp, 'experience points. The player has', player.get_exp(), 'experience points in total!')
-
 def move_down():
     print('moved down')
 
+def stats():
+    player.get_stats()
+
+def quit_game():
+    quit_choice = input('\nAre you sure you want to quit? (y/N): ')
+
+    if quit_choice.lower() == 'y':
+        quit()
+    else:
+        return
+
 methods = {
-    'move_down': move_down
+    'move_down': move_down,
+    'stats': stats,
+    'quit': quit_game
 }
 methods.update(zyga.world.get_default_action_methods())
 
 poison = zyga.items.Poison(itemdata.get('poison'))
+player.acquire_item(poison)
 
-command = input('|command-prompt> ')
-result = zyga.world.parse_actions(command, methods)
+os.system('cls clear')
 
-if result:
-    result()
+# Main game loop
+while True:
+    command = input('|command-prompt> ')
+    result = zyga.world.parse_actions(command, methods)
+
+    if result:
+        result()
+        print()
+
+    # input()
+    # os.system('cls clear')

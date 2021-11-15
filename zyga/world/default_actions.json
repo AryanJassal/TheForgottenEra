@@ -8,6 +8,11 @@
         },
         "use": {
             "%consumable": "$use"
-        }
+        },
+        "display|see|view|open": {
+            "stats": "$stats"
+        },
+        "stats": "$stats",
+        "exit|quit": "$quit"
     }
 }

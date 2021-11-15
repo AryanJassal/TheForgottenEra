@@ -1,4 +1,5 @@
 from ..main import active_entities
+import os
 
 class Entity:
     def __init__(self, attributes):
@@ -64,6 +65,23 @@ class Player(Entity):
 
         if not opponent.has_health():
             self.gain_exp(opponent.death_exp)
+
+    def get_inventory(self):
+        return self.inventory.items()
+
+    def get_item_from_inventory(self, item_id):
+        try:
+            return self.inventory[item_id]
+        except:
+            return None
+
+    def acquire_item(self, item):
+        self.inventory.update({item.name: item})
+    
+    def get_stats(self):
+        print('Health:', self.health)
+        print('Experience Points:', self.exp)
+        print('Money:', self.money)
 
 
 class Enemy(Entity):
