@@ -4,9 +4,19 @@
         "id": "poison",
         "tags": ["consumable", "liquid"],
         "on_consume": {
-            "effect": "damage",
-            "target": "self",
-            "strength": 20
+            "lose_health": 20,
+            "feedback": "Ouch! What was that, poison?!?!\n"
+        }
+    },
+    "baditem": {
+        "name": "Bad Item",
+        "id": "baditem",
+        "tags": ["consumable"],
+        "on_consume": {
+            "lose_health": 50,
+            "lose_hunger": 50,
+            "lose_thirst": 50,
+            "feedback": "Wha-chkow! This was a very very bad item, and now you've had it. Enjoy you life, while you can!\n"
         }
     }
 }

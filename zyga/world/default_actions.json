@@ -10,9 +10,12 @@
             "%consumable": "$use"
         },
         "display|see|view|open": {
-            "stats": "$stats"
+            "stats": "$stats",
+            "inv|inventory": "$inventory"
         },
         "stats": "$stats",
+        "inv|inventory": "$inventory",
+        "cls|clear": "$clear_screen",
         "exit|quit": "$quit"
     }
 }
