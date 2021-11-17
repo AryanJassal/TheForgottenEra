@@ -32,7 +32,8 @@ def parse_actions(prompt, methods=get_default_action_methods(), action_list=get_
                                 print(f'Method {value} not found.')
                                 return
                         else:
-                            print(f'Command method {value} not found in methods. Please add it in the dictionary and try again.')
+                            print(f'Command method {value} not found in methods. Please add it in the dictionary and try again.\n')
+                            return
                 else:
                     for prompts, action in value.items():
                         for prompt in prompts.split('|'):
@@ -50,7 +51,7 @@ def parse_actions(prompt, methods=get_default_action_methods(), action_list=get_
                                     if command[1] == items.id:
                                         items.consume()
                                         return
-                                print('Invalid argument provided. Please double-check it and try again.')
+                                print('The player does not have this item. You can check your inventory with the command \'inv\'.\n')
                                 return
 
                             # For method calling commands
@@ -61,15 +62,15 @@ def parse_actions(prompt, methods=get_default_action_methods(), action_list=get_
                                     try:
                                         return methods.get(action)
                                     except:
-                                        print(f'Method {action} not found.')
+                                        print(f'Method {action} not found.\n')
                                         return
                                 else:
-                                    print(f'Command method {action} not found in methods. Please add it in the dictionary and try again.')
+                                    print(f'Command method {action} not found in methods. Please add it in the dictionary and try again.\n')
                                     return
 
                             # Command not found in command dictionary
                             else:
-                                print('Incorrect argument provided. Please double-check it and try again.')
+                                print('Incorrect argument provided. Please double-check it and try again.\n')
                                 return
-        print('Command not found. Please check your spelling and try again.')
+        print('Command not found. Please check your spelling and try again.\n')
         return

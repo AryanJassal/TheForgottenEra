@@ -16,7 +16,7 @@ player = zyga.entity_classes.Player(zyga.game_objects.create_attribute_list(play
 # squirrel = zyga.entities.hideous_squirrel
 
 methods = return_actions()
-methods.update(zyga.world.get_default_action_methods())
+methods.update(zyga.cli.get_default_action_methods())
 
 # poison = zyga.items.Poison(itemdata.get('poison'))
 poison = zyga.items.Item(itemdata.get('poison'))
@@ -31,8 +31,8 @@ os.system('cls clear')
 # Main game loop
 while True:
     command = input('|command-prompt> ')
-    result = zyga.world.parse_actions(command, methods)
+    result = zyga.cli.parse_actions(command, methods)
 
     if result:
         result()
-        print()
+        # print()

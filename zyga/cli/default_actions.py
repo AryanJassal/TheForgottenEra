@@ -3,16 +3,16 @@ import os
 from ..main import active_entities
 
 def move_left():
-    print('moved left')
+    print('moved left\n')
 
 def move_right():
-    print('moved right')
+    print('moved right\n')
 
 def move_up():
-    print('moved up')
+    print('moved up\n')
 
 def move_down():
-    print('moved down')
+    print('moved down\n')
 
 def quit_game():
     quit_choice = input('\nAre you sure you want to quit? (y/N): ')
@@ -24,6 +24,7 @@ def quit_game():
 
 def stats():
     active_entities['player'].get_stats()
+    print()
 
 def clear_screen():
     os.system('cls clear')

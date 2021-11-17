@@ -1,5 +1,4 @@
 from ..main import active_entities
-import os
 
 class Entity:
     def __init__(self, attributes):
@@ -13,28 +12,35 @@ class Entity:
     def get_name(self):
         return self.name
 
-    def modify_health(self, health, operation='m'):
+    def modify_health(self, strength, operation='m'):
         if operation == 'm' or operation == '=':
-            self.health = health
+            self.health = strength
         elif operation == 'g' or operation == '+':
-            self.health = min(self.health, self.health + health)
+            self.health = min(self.health, self.health + strength)
         elif operation == 'l' or operation == '-':
-            self.health = max(0, self.health - health)
+            self.health = max(0, self.health - strength)
         else:
             raise ValueError(f'Operation {operation} is invalid. Options are: m: modify, g: gain, l: lose.')
 
-    def modify_max_health(self, health, operation='m'):
+    def modify_max_health(self, strength, operation='m'):
         if operation == 'm' or operation == '=':
-            self.max_health = health
+            self.max_health = strength
         elif operation == 'g' or operation == '+':
-            self.max_health = min(self.max_health, self.max_health + health)
+            self.max_health = min(self.max_health, self.max_health + strength)
         elif operation == 'l' or operation == '-':
-            self.max_health = max(0, self.max_health - health)
+            self.max_health = max(0, self.max_health - strength)
         else:
             raise ValueError(f'Operation {operation} is invalid. Options are: m: modify, g: gain, l: lose.')
 
-    def get_defense(self):
-        return self.defense
+    def modify_defense(self, strength, operation='m'):
+        if operation == 'm' or operation == '=':
+            self.defense = strength
+        elif operation == 'g' or operation == '+':
+            self.defense = min(self.defense, self.defense + strength)
+        elif operation == 'l' or operation == '-':
+            self.defense = max(0, self.defense - strength)
+        else:
+            raise ValueError(f'Operation {operation} is invalid. Options are: m: modify, g: gain, l: lose.')
 
     def has_health(self):
         return self.health > 0
@@ -43,12 +49,12 @@ class Entity:
         return max(0, self.attack - opponent.get_defense())
         # Do some wizardly math to account for def and other possible attributes
 
-    def attack_entity(self, opponent):
-        damage_given = self.calculate_damage(opponent)
+    # def attack_entity(self, opponent):
+    #     damage_given = self.calculate_damage(opponent)
 
-        opponent.remove_health(damage_given)
+    #     opponent.remove_health(damage_given)
 
-        return damage_given
+    #     return damage_given
 
 
 class Player(Entity):
@@ -110,91 +116,65 @@ class Player(Entity):
                 instances += 1
         return instances
 
-    # def modify_attributes(self, attributes):
-    #     self.max_hunger = attributes.get('max_hunger') if attributes.get('max_hunger', '') else self.max_hunger
-    #     self.hunger = attributes.get('hunger') if attributes.get('hunger', '') else self.hunger
-    #     self.max_thirst = attributes.get('max_thirst') if attributes.get('max_thirst', '') else self.max_thirst
-    #     self.thirst = attributes.get('thirst') if attributes.get('thirst', '') else self.thirst
-    #     self.max_stamina = attributes.get('max_stamina') if attributes.get('max_stamina', '') else self.max_stamina
-    #     self.stamina = attributes.get('stamina') if attributes.get('stamina', '') else self.stamina
-
-    # def gain_hunger(self, hunger):
-    #     self.hunger = min(self.max_hunger, self.hunger + hunger)
-
-    def modify_hunger(self, hunger, operation='m'):
+    def modify_hunger(self, strength, operation='m'):
         if operation == 'm' or operation == '=':
-            self.hunger = hunger
+            self.hunger = strength
         elif operation == 'g' or operation == '+':
-            self.hunger = min(self.hunger, self.hunger + hunger)
+            self.hunger = min(self.hunger, self.hunger + strength)
         elif operation == 'l' or operation == '-':
-            self.hunger = max(0, self.hunger - hunger)
+            self.hunger = max(0, self.hunger - strength)
         else:
             raise ValueError(f'Operation {operation} is invalid. Options are: m: modify, g: gain, l: lose.')
 
-    def modify_max_hunger(self, hunger, operation='m'):
+    def modify_max_hunger(self, strength, operation='m'):
         if operation == 'm' or operation == '=':
-            self.max_hunger = hunger
+            self.max_hunger = strength
         elif operation == 'g' or operation == '+':
-            self.max_hunger = min(self.max_hunger, self.max_hunger + hunger)
+            self.max_hunger = min(self.max_hunger, self.max_hunger + strength)
         elif operation == 'l' or operation == '-':
-            self.max_hunger = max(0, self.max_hunger - hunger)
+            self.max_hunger = max(0, self.max_hunger - strength)
         else:
             raise ValueError(f'Operation {operation} is invalid. Options are: m: modify, g: gain, l: lose.')
     
-    # def lose_hunger(self, hunger):
-    #     self.hunger = max(0, self.hunger - hunger)
-
-    # def gain_thirst(self, thirst):
-    #     self.thirst = min(self.max_hunger, self.thirst + thirst)
-    
-    def modify_thirst(self, thirst, operation='m'):
+    def modify_thirst(self, strength, operation='m'):
         if operation == 'm' or operation == '=':
-            self.thirst = thirst
+            self.thirst = strength
         elif operation == 'g' or operation == '+':
-            self.thirst = min(self.thirst, self.thirst + thirst)
+            self.thirst = min(self.thirst, self.thirst + strength)
         elif operation == 'l' or operation == '-':
-            self.thirst = max(0, self.thirst - thirst)
+            self.thirst = max(0, self.thirst - strength)
         else:
             raise ValueError(f'Operation {operation} is invalid. Options are: m: modify, g: gain, l: lose.')
 
-    def modify_max_thirst(self, thirst, operation='m'):
+    def modify_max_thirst(self, strength, operation='m'):
         if operation == 'm' or operation == '=':
-            self.max_thirst = thirst
+            self.max_thirst = strength
         elif operation == 'g' or operation == '+':
-            self.max_thirst = min(self.max_thirst, self.max_thirst + thirst)
+            self.max_thirst = min(self.max_thirst, self.max_thirst + strength)
         elif operation == 'l' or operation == '-':
-            self.max_thirst = max(0, self.max_thirst - thirst)
+            self.max_thirst = max(0, self.max_thirst - strength)
         else:
             raise ValueError(f'Operation {operation} is invalid. Options are: m: modify, g: gain, l: lose.')
 
-    # def lose_thirst(self, thirst):
-    #     self.hunger = max(0, self.thirst + thirst)
-
-    # def gain_stamina(self, stamina):
-        # self.hunger = min(self.max_stamina, self.stamina + stamina)
-
-    def modify_stamina(self, stamina, operation='m'):
+    def modify_stamina(self, strength, operation='m'):
         if operation == 'm' or operation == '=':
-            self.stamina = stamina
+            self.stamina = strength
         elif operation == 'g' or operation == '+':
-            self.stamina = min(self.stamina, self.stamina + stamina)
+            self.stamina = min(self.stamina, self.stamina + strength)
         elif operation == 'l' or operation == '-':
-            self.stamina = max(0, self.stamina - stamina)
+            self.stamina = max(0, self.stamina - strength)
         else:
             raise ValueError(f'Operation {operation} is invalid. Options are: m: modify, g: gain, l: lose.')
 
-    def modify_max_stamina(self, stamina, operation='m'):
+    def modify_max_stamina(self, strength, operation='m'):
         if operation == 'm' or operation == '=':
-            self.max_stamina = stamina
+            self.max_stamina = strength
         elif operation == 'g' or operation == '+':
-            self.max_stamina = min(self.max_stamina, self.max_stamina + stamina)
+            self.max_stamina = min(self.max_stamina, self.max_stamina + strength)
         elif operation == 'l' or operation == '-':
-            self.max_stamina = max(0, self.max_stamina - stamina)
+            self.max_stamina = max(0, self.max_stamina - strength)
         else:
             raise ValueError(f'Operation {operation} is invalid. Options are: m: modify, g: gain, l: lose.')
-
-    # def lose_stamina(self, stamina):
-        # self.stamina = max(0, self.stamina + stamina)
 
 class Enemy(Entity):
     def __init__(self, attributes):
@@ -205,5 +185,5 @@ class Enemy(Entity):
         # active_entities[self.name] = 
         # Need to add multiple enemies to active entities with id
 
-    def destroy_object(self):
+    def kill_self(self):
         del self
