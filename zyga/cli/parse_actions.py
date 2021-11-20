@@ -1,20 +1,25 @@
-import os, json
+import json
 from .default_actions import *
 from ..main import *
-from ..game_objects import *
+# from ..game_objects import *
 
 SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
 
+
 def get_default_actions():
     with open(os.path.join(SCRIPT_PATH, 'default_actions.json'), 'r') as def_actions:
-        return json.load(def_actions)
+        if def_actions:
+            return json.load(def_actions)
+        print('The file default_actions.json could not be loaded.')
+        return
 
-def parse_actions(prompt, methods=get_default_action_methods(), action_list=get_default_actions()):
-    if not prompt:
+
+def parse_actions(_prompt, methods=get_default_action_methods(), action_list=get_default_actions()):
+    if not _prompt:
         # print('Please enter a command.')
         return
 
-    command = prompt.split()
+    command = _prompt.split()
     player = active_entities['player']
 
     for v in action_list.values():
@@ -45,23 +50,23 @@ def parse_actions(prompt, methods=get_default_action_methods(), action_list=get_
                                 for item in player.get_inventory():
                                     for tag in item.get_tags():
                                         if tag == prompt:
-                                            valid_items[item.name] = item                     
+                                            valid_items[item.name] = item
 
-                                for items in valid_items.values():
-                                    if command[1] == items.id:
-                                        items.consume()
+                                for _items in valid_items.values():
+                                    if command[1] == _items.item_id:
+                                        _items.consume()
                                         return
                                 print('The player does not have this item. You can check your inventory with the command \'inv\'.\n')
                                 return
 
                             # For method calling commands
-                            elif command[1] == prompt:
+                            if command[1] == prompt:
                                 action = action.replace('$', '')
 
                                 if methods.get(action):
                                     try:
                                         return methods.get(action)
-                                    except:
+                                    except AttributeError:
                                         print(f'Method {action} not found.\n')
                                         return
                                 else:

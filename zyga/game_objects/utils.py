@@ -1,5 +1,6 @@
 import random
 
+
 def create_attribute_list(attributes):
     attribute_list = {}
 

@@ -49,13 +49,6 @@ class Entity:
         return max(0, self.attack - opponent.get_defense())
         # Do some wizardly math to account for def and other possible attributes
 
-    # def attack_entity(self, opponent):
-    #     damage_given = self.calculate_damage(opponent)
-
-    #     opponent.remove_health(damage_given)
-
-    #     return damage_given
-
 
 class Player(Entity):
     def __init__(self, attributes):
@@ -112,7 +105,7 @@ class Player(Entity):
     def get_amount_of_item(self, item):
         instances = 0
         for instance in self.get_inventory():
-            if instance.id == item.id:
+            if instance.item_id == item.item_id:
                 instances += 1
         return instances
 
@@ -183,7 +176,7 @@ class Enemy(Entity):
         self.death_exp = attributes.get('death_exp', 0)
 
         # active_entities[self.name] = 
-        # Need to add multiple enemies to active entities with id
+        # Need to add multiple enemies to active entities with item_id
 
     def kill_self(self):
         del self

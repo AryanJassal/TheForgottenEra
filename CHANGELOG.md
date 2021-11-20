@@ -1,49 +1,40 @@
-# Build b18112021-01
+# Build b20112021
 
 ## **Build Highlights**
 
-Very basic improvements. Fixed the `on_consume` in `item.consume()`. You thought that was all? No, sir! We have a plethora of improvements! A large chunk of agenda for the next update was completed! Just need to do minor, QOL improvements and making a player save file, then all is done.
+TODO
 
 ## **Build Notes**
 
 From now on, I will not work on any complex features, and just aim at cleaning up and optimising the code.
 
+This is just for me and my future reference: I tried to pass `**kwargs` to initialise item classes, and it was more trouble and user-unfriendliness than the current pass dictionary to class and `__init__` function will do its job method.
+
 ## **New Features/Additons**
 
-- Made the `##` headings bold in `CHANGELOG.md`
-- Added methods in `Player` class
-  - Added `modify_defense` function
+- Added `print_player_inventory` function in `textrenderer.py` in the `cli` module.
 
 ## **Changes/Bug Fixes**
 
-- Modified the `Player` class
-  - Removed commented, unused `modify_attributes` function
-  - Removed commented, unused `get_health` function
-  - Removed commented, unused `lose_hunger` function
-  - Removed commented, unused `gain_hunger` function
-  - Removed commented, unused `lose_stamina` function
-  - Removed commented, unused `gain_stamina` function
-  - Removed commented, unused `lose_thirst` function
-  - Removed commented, unused `gain_thirst` function
-  - Removed redundant `get_defense` function. Instead, use `entity.defense`.
-- Removed commented, unused `Item` subclasses for favour for a universal `Item` class
-  - Removed `Poison` class
-  - Removed `BadItem` class
-- Changed `destroy_object` to `kill_self` in `Enemy` class
-- Changed error message if selected item is not found in valid_items list in `parse_actions.py`
-- Removed `print()` after `result()` in `main.py` in preference to putting a `\n` after every error message or console out.
-- Moved `default_actions.json`, `default_actions.py`, and `parse_actions.py` to `cli` sub-module.
-- Removed `from . import parse_actions` from `world` sub-module's `__init__.py`, transferring it to `cli` submodule's `__init__.py`
-  - Added `cli` sub-module in `zyga.__init__.py`
+- Changed main working branch from `master` to a different `development` branch.
+  - Build version will reflect the day of merging `development` into `master`.
+- Removed redundant `attack_enemy` method from `Entity` class
+- Changed `os.system('cls clear')` to `import subprocess; subprocess.call('cls clear', shell=False)`
+- Changed `if '%' in prompt; elif command[1] == prompt` to two separate `if` statements
+- Added a default `None` value for `get_default_actions` in `parse_actions.py`
+- Added `except AttributeError` for method calling commands in `parse_actions.py`
+- Fixed indentation error in `consume` function of `Item` class in `item_classes.py`.
+- Renamed `render.py` to `textrenderer.py` in `cli` module.
+- Changed values of `__init__.py` in the `cli` module and the `zyga` package
 
 ## **Agenda for next update**
 
-- Making a player save file
-- [-] Deal with new line above command input on clearing screen
-- [-] Add feedback to the player that player does not have item in their inventory
-- Add item description
-- Optimise/clean code (comes at the end, or at least, in later stages)
-- [-] Fix issue with `modify_health` draining too much health
-- [-] Add modifiers for consume item max_ stats
+- [x] Add modifiers for consume item max_ stats
+- [x] Fix issue with `modify_health` draining too much health
+- [x] Deal with new line above command input on clearing screen
+- [x] Add feedback to the player that player does not have item in their inventory
+- [x] Add item description
+- [ ] Making a player save file
+- [ ] Optimise/clean code (comes at the end, or at least, in later stages)
 
-- Adding worldgen/world interaction
+- [ ] Adding worldgen/world interaction
