@@ -17,6 +17,7 @@ Note: Player cannot save because items in player inventory are references to cla
 - Added `print_player_inventory` function in `textrenderer.py` in the `cli` module.
 - Added `save_player` in `default_actions.py` in `cli` module.
 - Added `modify_attributes` function in the `Player` class.
+- Added `development` variable in `zyga/main.py`, which is separate from `global_vars`
 
 ## **Changes/Bug Fixes**
 
@@ -32,17 +33,4 @@ Note: Player cannot save because items in player inventory are references to cla
 - Added error checking to loading files
   - Added error checking before loading an empty `playerconfig.json` file.
 - Removed duplicated code in `modify_x` function, replaced with a call to the `modify_attributes` function
-
-## **Agenda for next update**
-
-- [x] Add modifiers for consume item max_ stats
-- [x] Fix issue with `modify_health` draining too much health
-- [x] Deal with new line above command input on clearing screen
-- [x] Add feedback to the player that player does not have item in their inventory
-- [x] Add item description
-- [x] Deal with the game crashing if nothing is in the `playerconfig.json` file.
-- [x] Make a function `modify_attribute` in `Player` class which modifies an attribute, then modify a function using that attribute instead of using extremely similar code for every `modify_x` function.
-- [ ] Making a player save file
-- [ ] Optimise/clean code (comes at the end, or at least, in later stages)
-
-- [ ] Adding worldgen/world interaction
+- Migrated `Agenda for Next Update` to GitHub Projects

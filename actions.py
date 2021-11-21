@@ -11,7 +11,7 @@ def display_inventory():
     #         print(f'[{player.get_amount_of_item(item)}x] {item.name}')
     #         done_items.append(item)
     # print()
-    zyga.cli.print_player_inventory(player.get_inventory())
+    zyga.cli.print_player_inventory(player.get_inventory().items())
     return
 
 

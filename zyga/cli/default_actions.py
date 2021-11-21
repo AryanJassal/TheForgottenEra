@@ -1,5 +1,5 @@
 import json
-
+import pickle
 from ..main import active_entities, global_vars
 from ..utils import *
 
@@ -31,17 +31,19 @@ def quit_game():
 
 
 def stats():
-    active_entities['player'].get_stats()
+    for stat, value in active_entities['player'].get_stats().items():
+        print(stat.capitalize() + ': ' + str(value))
     print()
 
 
 def save_player():
     player = active_entities['player']
-    with open(global_vars.get('player_savefile_path', ''), 'w') as player_savefile:
+    with open(global_vars.get('player_savefile_path', ''), 'w+') as player_savefile:
         if player_savefile:
-            print(player)
-            print(vars(player))
-            player_savefile.write(json.dumps(vars(player)))
+            player_attributes = vars(player)
+            del player_attributes['inventory']
+            # Write to save file
+            player_savefile.write(json.dumps(player_attributes))
 
 
 def get_default_action_methods():

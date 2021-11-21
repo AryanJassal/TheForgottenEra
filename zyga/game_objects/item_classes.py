@@ -36,3 +36,9 @@ class Item:
             if action == 'feedback':
                 print(params)
         player.remove_item(self)
+
+    def toJSON(self):
+        return dict(name=self.name, item_id=self.item_id, tags=self.tags, consume_action=self.consume_action, description=self.description)
+
+    def __repr__(self):
+        return self.toJSON()
