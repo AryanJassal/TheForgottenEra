@@ -47,14 +47,14 @@ def parse_actions(_prompt, methods=get_default_action_methods(), action_list=get
                                 valid_items = {}
                                 prompt = prompt.replace('%', '')
 
-                                for item in player.get_inventory():
-                                    for tag in item.get_tags():
+                                for item_id, data in player.get_inventory().items():
+                                    for tag in data['item'].get_tags():
                                         if tag == prompt:
-                                            valid_items[item.name] = item
+                                            valid_items[item_id] = data['item']
 
-                                for _items in valid_items.values():
-                                    if command[1] == _items.item_id:
-                                        _items.consume()
+                                for _item_id, _item in valid_items.items():
+                                    if command[1] == _item_id:
+                                        _item.consume()
                                         return
                                 print('The player does not have this item. You can check your inventory with the command \'inv\'.\n')
                                 return

@@ -38,7 +38,7 @@ def stats():
 
 def save_player():
     player = active_entities['player']
-    with open(global_vars.get('player_savefile_path', ''), 'w+') as player_savefile:
+    with open(global_vars.get('player_savefile'), 'w+') as player_savefile:
         if player_savefile:
             player_attributes = vars(player)
             del player_attributes['inventory']

@@ -8,7 +8,7 @@ class Entity(object):
         self.health = self.max_health
         self.attack = attributes.get('attack', 0)
         self.defense = attributes.get('defense', 0)
-        # self.level = attributes.get('level', 0)
+        self.level = attributes.get('level', 0)
 
     def get_name(self):
         return self.name
@@ -92,8 +92,7 @@ class Player(Entity):
         except KeyError:
             self.inventory.update({
                 item.item_id: {
-                    'class_name': item.__class__.__name__,
-                    'name': item.name,
+                    'item': item,
                     'amount': 1
                 }
             })
