@@ -1,6 +1,7 @@
 from ..main import active_entities
 
-class Entity:
+
+class Entity(object):
     def __init__(self, attributes):
         self.name = attributes.get('name', '')
         self.max_health = attributes.get('max_health', 1)
@@ -168,6 +169,7 @@ class Player(Entity):
             self.max_stamina = max(0, self.max_stamina - strength)
         else:
             raise ValueError(f'Operation {operation} is invalid. Options are: m: modify, g: gain, l: lose.')
+
 
 class Enemy(Entity):
     def __init__(self, attributes):

@@ -4,7 +4,7 @@ from ..main import active_entities
 class Item:
     def __init__(self, attributes):
         self.name = attributes.get('name', '')
-        self.item_id = attributes['item_id']
+        self.item_id = attributes['id']
         self.tags = [tag for tag in attributes['tags']]
         self.consume_action = attributes['on_consume']
         self.description = attributes.get('description', '')

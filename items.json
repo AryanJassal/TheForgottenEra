@@ -1,7 +1,7 @@
 {
     "poison": {
         "name": "Poison",
-        "item_id": "poison",
+        "id": "poison",
         "tags": ["consumable", "liquid"],
         "description": "Poison. You know. The death liquid. Warning: DO NOT DRINK.",
         "on_consume": {
@@ -11,7 +11,7 @@
     },
     "baditem": {
         "name": "Bad Item",
-        "item_id": "baditem",
+        "id": "baditem",
         "tags": ["consumable"],
         "description": "This a bad, bad item. This will DEFINITELY harm you. This deals quite a punch too. You just consume and watch. This will be the last thing that you will ever attempt!",
         "on_consume": {

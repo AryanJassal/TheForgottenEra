@@ -34,6 +34,7 @@ This is just for me and my future reference: I tried to pass `**kwargs` to initi
 - [x] Deal with new line above command input on clearing screen
 - [x] Add feedback to the player that player does not have item in their inventory
 - [x] Add item description
+- [ ] Deal with the game crashing if nothing is in the `playerconfig.json` file.
 - [ ] Making a player save file
 - [ ] Optimise/clean code (comes at the end, or at least, in later stages)
 

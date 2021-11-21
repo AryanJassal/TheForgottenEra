@@ -1,6 +1,7 @@
-import os, subprocess
+import json
 
-from ..main import active_entities
+from ..main import active_entities, global_vars
+from ..utils import *
 
 
 def move_left():
@@ -20,6 +21,7 @@ def move_down():
 
 
 def quit_game():
+    save_player()
     quit_choice = input('\nAre you sure you want to quit? (y/N): ')
 
     if quit_choice.lower() == 'y':
@@ -33,8 +35,13 @@ def stats():
     print()
 
 
-def clear_screen():
-    subprocess.call('cls clear', shell=False)
+def save_player():
+    player = active_entities['player']
+    with open(global_vars.get('player_savefile_path', ''), 'w') as player_savefile:
+        if player_savefile:
+            print(player)
+            print(vars(player))
+            player_savefile.write(json.dumps(vars(player)))
 
 
 def get_default_action_methods():
@@ -45,5 +52,6 @@ def get_default_action_methods():
         'move_down': move_down,
         'quit': quit_game,
         'stats': stats,
-        'clear_screen': clear_screen
+        'clear_screen': clear_screen,
+        'save_player': save_player
     }
