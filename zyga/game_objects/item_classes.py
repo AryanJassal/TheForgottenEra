@@ -4,9 +4,9 @@ from ..main import active_entities
 class Item:
     def __init__(self, attributes):
         self.name = attributes.get('name', '')
-        self.item_id = attributes['id']
+        self.item_id = attributes['item_id']
         self.tags = [tag for tag in attributes['tags']]
-        self.consume_action = attributes['on_consume']
+        self.consume_action = attributes['consume_action']
         self.description = attributes.get('description', '')
 
     def get_tags(self):
@@ -38,7 +38,4 @@ class Item:
         player.remove_item(self)
 
     def toJSON(self):
-        return dict(name=self.name, item_id=self.item_id, tags=self.tags, consume_action=self.consume_action, description=self.description)
-
-    def __repr__(self):
-        return self.toJSON()
+        return self.__dict__

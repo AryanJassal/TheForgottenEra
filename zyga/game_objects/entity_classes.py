@@ -82,7 +82,7 @@ class Player(Entity):
     def get_item_from_inventory(self, item_id):
         try:
             return self.inventory[item_id]
-        except:
+        except KeyError:
             return None
 
     def acquire_item(self, item):

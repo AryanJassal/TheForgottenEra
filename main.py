@@ -1,64 +1,37 @@
-import json
-import os
-import sys
-import zyga
+from zyga import *
 from actions import return_actions
 
 SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
-PLAYER_SAVEFILE_DIR = os.path.dirname(os.path.abspath('playerconfig.json'))
 PLAYER_SAVEFILE = os.path.abspath('playerconfig.json')
+PLAYER_INVENTORY_SAVEFILE = os.path.abspath('playerinventory.json')
 
 sys.path.append(SCRIPT_PATH)
-zyga.global_vars['player_savefile'] = PLAYER_SAVEFILE
+global_vars['player_savefile'] = PLAYER_SAVEFILE
+global_vars['player_inventory_savefile'] = PLAYER_INVENTORY_SAVEFILE
 
 
-def load_player(playerconfig):
-    attribute_list = {}
-    for key, value in playerconfig.items():
-        attribute_list[key] = value
+playerdata = load_file(PLAYER_SAVEFILE)
+playerinventory = load_file(PLAYER_INVENTORY_SAVEFILE)
+itemdata = load_file('items.json')
 
-    return attribute_list
-
-
-try:
-    with open(PLAYER_SAVEFILE, 'r') as file:
-        playerdata = {}
-        try:
-            playerdata = json.load(file)
-        except json.JSONDecodeError:
-            # The file's empty
-            zyga.clear_screen()
-            print('The player configuration file is empty. Loading base values for all player stats.')
-            zyga.pause_screen('Press any key to continue.')
-except FileNotFoundError:
-    zyga.clear_screen()
-    print('The player configuration file does not exist. Loading base values for all player stats.')
-    zyga.pause_screen('Press any key to continue.')
-
-
-with open('items.json', 'r') as file:
-    itemdata = json.load(file)
-
-player = zyga.entity_classes.Player(load_player(playerdata))
+player = load_player(playerdata, playerinventory)
 
 methods = return_actions()
-methods.update(zyga.cli.get_default_action_methods())
+methods.update(cli.get_default_action_methods())
 
-poison = zyga.items.Item(itemdata.get('poison'))
-baditem = zyga.items.Item(itemdata.get('baditem'))
-player.acquire_item(poison)
-player.acquire_item(poison)
-player.acquire_item(poison)
-player.acquire_item(baditem)
+# poison = items.Item(itemdata.get('poison'))
+# baditem = items.Item(itemdata.get('baditem'))
+# player.acquire_item(poison)
+# player.acquire_item(poison)
+# player.acquire_item(poison)
+# player.acquire_item(baditem)
 
 os.system('cls clear')
-# print(PLAYER_SAVEFILE_PATH)
 
 # Main game loop
 while True:
-    command = input('|command-prompt> ')
-    result = zyga.cli.parse_actions(command, methods)
+    command = input('|> ')
+    result = cli.parse_actions(command, methods)
 
     if result:
         result()
-        # print()

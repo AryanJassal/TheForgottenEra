@@ -17,5 +17,5 @@ def print_player_inventory(player_inventory):
     # for item, data in player_inventory:
     #     print(f'[{data.get("amount", "")}x] {data.get("name", "")}')
     # print()
-
+    print()
     return

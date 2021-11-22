@@ -32,8 +32,8 @@ def parse_actions(_prompt, methods=get_default_action_methods(), action_list=get
 
                         if methods.get(value):
                             try:
-                                return methods.get(value)
-                            except:
+                                return methods[value]
+                            except KeyError:
                                 print(f'Method {value} not found.')
                                 return
                         else:

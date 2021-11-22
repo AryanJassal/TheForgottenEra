@@ -1,5 +1,5 @@
 import json
-import pickle
+import copy
 from ..main import active_entities, global_vars
 from ..utils import *
 
@@ -39,11 +39,17 @@ def stats():
 def save_player():
     player = active_entities['player']
     with open(global_vars.get('player_savefile'), 'w+') as player_savefile:
-        if player_savefile:
-            player_attributes = vars(player)
-            del player_attributes['inventory']
-            # Write to save file
-            player_savefile.write(json.dumps(player_attributes))
+        player_attributes = copy.deepcopy(player.__dict__)
+        player_attributes.pop('inventory')
+        player_savefile.write(json.dumps(player_attributes))
+
+    with open(global_vars.get('player_inventory_savefile'), 'w+') as player_inventory_savefile:
+        player = active_entities['player']
+        jsonified_inventory = []
+        for item_id, item_data in player.get_inventory().items():
+            for i in range(int(item_data['amount'])):
+                jsonified_inventory.append(item_data['item'].toJSON())
+        player_inventory_savefile.write(json.dumps(jsonified_inventory))
 
 
 def get_default_action_methods():
