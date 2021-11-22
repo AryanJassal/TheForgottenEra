@@ -1,20 +1,25 @@
-import os, json
+# import os
 from .default_actions import *
 from ..main import *
-from ..game_objects import *
+# from ..game_objects import *
 
 SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
 
+
 def get_default_actions():
     with open(os.path.join(SCRIPT_PATH, 'default_actions.json'), 'r') as def_actions:
-        return json.load(def_actions)
+        if def_actions:
+            return json.load(def_actions)
+        print('The file default_actions.json could not be loaded.')
+        return
 
-def parse_actions(prompt, methods=get_default_action_methods(), action_list=get_default_actions()):
-    if not prompt:
+
+def parse_actions(_prompt, methods=get_default_action_methods(), action_list=get_default_actions()):
+    if not _prompt:
         # print('Please enter a command.')
         return
 
-    command = prompt.split()
+    command = _prompt.split()
     player = active_entities['player']
 
     for v in action_list.values():
@@ -27,8 +32,8 @@ def parse_actions(prompt, methods=get_default_action_methods(), action_list=get_
 
                         if methods.get(value):
                             try:
-                                return methods.get(value)
-                            except:
+                                return methods[value]
+                            except KeyError:
                                 print(f'Method {value} not found.')
                                 return
                         else:
@@ -42,26 +47,26 @@ def parse_actions(prompt, methods=get_default_action_methods(), action_list=get_
                                 valid_items = {}
                                 prompt = prompt.replace('%', '')
 
-                                for item in player.get_inventory():
-                                    for tag in item.get_tags():
+                                for item_id, data in player.get_inventory().items():
+                                    for tag in data['item'].get_tags():
                                         if tag == prompt:
-                                            valid_items[item.name] = item                     
+                                            valid_items[item_id] = data['item']
 
-                                for items in valid_items.values():
-                                    if command[1] == items.id:
-                                        items.consume()
+                                for _item_id, _item in valid_items.items():
+                                    if command[1] == _item_id:
+                                        _item.consume()
                                         return
                                 print('The player does not have this item. You can check your inventory with the command \'inv\'.\n')
                                 return
 
                             # For method calling commands
-                            elif command[1] == prompt:
+                            if command[1] == prompt:
                                 action = action.replace('$', '')
 
                                 if methods.get(action):
                                     try:
                                         return methods.get(action)
-                                    except:
+                                    except AttributeError:
                                         print(f'Method {action} not found.\n')
                                         return
                                 else:

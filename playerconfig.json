@@ -1,12 +1,1 @@
-{
-    "player_data": {
-        "name": "Admin",
-        "max_health": 100,
-        "attack": 6 ,
-        "defense": {
-            "min": 1,
-            "max": 4
-        },
-        "exp": 10
-    }
-}
+{"name": "", "max_health": 1, "health": 0, "attack": 0, "defense": 0, "level": 0, "money": 0, "max_hunger": 1, "hunger": 1, "max_thirst": 1, "thirst": 1, "max_stamina": 1, "stamina": 1, "exp": 0}

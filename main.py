@@ -1,38 +1,37 @@
-import json, os, sys
-import zyga
-
+from zyga import *
 from actions import return_actions
 
 SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
+PLAYER_SAVEFILE = os.path.abspath('playerconfig.json')
+PLAYER_INVENTORY_SAVEFILE = os.path.abspath('playerinventory.json')
+
 sys.path.append(SCRIPT_PATH)
+global_vars['player_savefile'] = PLAYER_SAVEFILE
+global_vars['player_inventory_savefile'] = PLAYER_INVENTORY_SAVEFILE
 
-with open('playerconfig.json', 'r') as file:
-    playerdata = json.load(file)
 
-with open('items.json', 'r') as file:
-    itemdata = json.load(file)
+playerdata = load_file(PLAYER_SAVEFILE)
+playerinventory = load_file(PLAYER_INVENTORY_SAVEFILE)
+itemdata = load_file('items.json')
 
-player = zyga.entity_classes.Player(zyga.game_objects.create_attribute_list(playerdata))
-# squirrel = zyga.entities.hideous_squirrel
+player = load_player(playerdata, playerinventory)
 
 methods = return_actions()
-methods.update(zyga.cli.get_default_action_methods())
+methods.update(cli.get_default_action_methods())
 
-# poison = zyga.items.Poison(itemdata.get('poison'))
-poison = zyga.items.Item(itemdata.get('poison'))
-baditem = zyga.items.Item(itemdata.get('baditem'))
-player.acquire_item(poison)
-player.acquire_item(poison)
-player.acquire_item(poison)
-player.acquire_item(baditem)
+# poison = items.Item(itemdata.get('poison'))
+# baditem = items.Item(itemdata.get('baditem'))
+# player.acquire_item(poison)
+# player.acquire_item(poison)
+# player.acquire_item(poison)
+# player.acquire_item(baditem)
 
 os.system('cls clear')
 
 # Main game loop
 while True:
-    command = input('|command-prompt> ')
-    result = zyga.cli.parse_actions(command, methods)
+    command = input('|> ')
+    result = cli.parse_actions(command, methods)
 
     if result:
         result()
-        # print()

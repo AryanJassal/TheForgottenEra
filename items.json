@@ -1,18 +1,20 @@
 {
     "poison": {
         "name": "Poison",
-        "id": "poison",
+        "item_id": "poison",
         "tags": ["consumable", "liquid"],
-        "on_consume": {
+        "description": "Poison. You know. The death liquid. Warning: DO NOT DRINK.",
+        "consume_action": {
             "modify_health": {"strength": 20, "operation": "-"},
             "feedback": "Ouch! What was that, poison?!?!\n"
         }
     },
     "baditem": {
         "name": "Bad Item",
-        "id": "baditem",
+        "item_id": "baditem",
         "tags": ["consumable"],
-        "on_consume": {
+        "description": "This a bad, bad item. This will DEFINITELY harm you. This deals quite a punch too. You just consume and watch. This will be the last thing that you will ever attempt!",
+        "consume_action": {
             "modify_health": {"strength": 50, "operation": "-"},
             "modify_hunger": {"strength": 50, "operation": "-"},
             "modify_thirst": {"strength": 50, "operation": "-"},
