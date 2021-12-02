@@ -17,3 +17,5 @@ This all may change. I don't even know if I'm going to release this on [PyPi](ht
 ## What's new around this update/release/build?
 
 Check out the [CHANGELOG](https://github.com/AryanJassal/TheForgottenEra/blob/master/CHANGELOG.md) for details on changes and fixes.
+
+**UPDATE:** The project status has been changed to *GRAVEYARD*, signifying that I will no longer actively work on this project for now. The project may be revived in the future, coming back to the project status of *ACTIVE DEVELOPMENT*, but it is unlikely. The project was abandoned as I wish to create this using a UI (user interface) using a game engine, and not a command line. This will improve the experience of both the programmer and the user.
